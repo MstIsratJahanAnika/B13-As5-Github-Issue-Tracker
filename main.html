@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github Issue Tracker | Main Page</title>
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- daisyUI + Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body class="min-h-screen bg-[#F8FAFC]">
+    <header>
+        <!-- navbar start -->
+         <div class="navbar bg-base-100 shadow-sm">
+            <div class="navbar-start">
+                <div class="dropdown">
+                    <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h8m-8 6h16" />
+                        </svg>
+                    </div>
+
+                    <!-- responsive er dropdown -->
+                     <ul tabindex="-1" 
+                        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        <li><a href="" class="btn btn-ghost"><span><i class="fa-github"></i></span> New Issues</a></li>
+                     </ul>
+                </div>
+                <a href="" class="btn btn-ghost text-xl">
+                    <div class="flex gap-2">
+                        <span class="text-2xl"><i class="fa-brands fa-github"></i></span>
+                        <p class="font-semibold text-2xl hidden md:flex">GitHub Issues Tracker</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="navbar-end gap-4">
+
+                <!-- search input -->
+                <div class="join">
+                    <div>
+                        <!-- search bar -->
+                         <label for="" class="input validator join-item flex items-center gap-2">
+                            <i class="fa-solid fa-magnifying-glass opacity-50"></i>
+                            <!-- ja diye search kora hobe -->
+                             <input id="inputText" type="text" placeholder="Search issues..." required />
+                         </label>
+                         <div class="validator-hint hidden">Enter valid Issue</div>
+                    </div>
+                    <!-- click korle search hobe -->
+                     <button id="searchBtn" class="btn btn-primary btn-active join-item" onclick="searchIssues()">Search</button>
+                </div>
+
+                <!-- new issues button -->
+                 <div class="hidden md:flex">
+                    <button class="btn btn-soft btn-primary hover:text-white"><span><i class="fa-solid fa-plus"></i></span>New Issue</button>
+                 </div>
+            </div>
+        </div>
+        <!-- navbar end -->
+    </header>
+</body>
+</html>
