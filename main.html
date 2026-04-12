@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,10 +22,11 @@
 
     <link rel="stylesheet" href="./styles/style.css">
 </head>
+
 <body class="min-h-screen bg-[#F8FAFC]">
     <header>
         <!-- navbar start -->
-         <div class="navbar bg-base-100 shadow-sm">
+        <div class="navbar bg-base-100 shadow-sm">
             <div class="navbar-start">
                 <div class="dropdown">
                     <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -36,10 +38,10 @@
                     </div>
 
                     <!-- responsive er dropdown -->
-                     <ul tabindex="-1" 
+                    <ul tabindex="-1"
                         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                         <li><a href="" class="btn btn-ghost"><span><i class="fa-github"></i></span> New Issues</a></li>
-                     </ul>
+                    </ul>
                 </div>
                 <a href="" class="btn btn-ghost text-xl">
                     <div class="flex gap-2">
@@ -55,21 +57,23 @@
                 <div class="join">
                     <div>
                         <!-- search bar -->
-                         <label for="" class="input validator join-item flex items-center gap-2">
+                        <label for="" class="input validator join-item flex items-center gap-2">
                             <i class="fa-solid fa-magnifying-glass opacity-50"></i>
                             <!-- ja diye search kora hobe -->
-                             <input id="inputText" type="text" placeholder="Search issues..." required />
-                         </label>
-                         <div class="validator-hint hidden">Enter valid Issue</div>
+                            <input id="inputText" type="text" placeholder="Search issues..." required />
+                        </label>
+                        <div class="validator-hint hidden">Enter valid Issue</div>
                     </div>
                     <!-- click korle search hobe -->
-                     <button id="searchBtn" class="btn btn-primary btn-active join-item" onclick="searchIssues()">Search</button>
+                    <button id="searchBtn" class="btn btn-primary btn-active join-item"
+                        onclick="searchIssues()">Search</button>
                 </div>
 
                 <!-- new issues button -->
-                 <div class="hidden md:flex">
-                    <button class="btn btn-soft btn-primary hover:text-white"><span><i class="fa-solid fa-plus"></i></span>New Issue</button>
-                 </div>
+                <div class="hidden md:flex">
+                    <button class="btn btn-soft btn-primary hover:text-white"><span><i
+                                class="fa-solid fa-plus"></i></span>New Issue</button>
+                </div>
             </div>
         </div>
         <!-- navbar end -->
@@ -80,24 +84,28 @@
             <div class="py-6 mb-4 bg-[#FFFFFF] shadow rounded-lg">
 
                 <!-- buttons div -->
-                 <div class="flex justify-start items-center p-6 gap-2">
+                <div class="flex justify-start items-center p-6 gap-2">
 
                     <!-- buttons - click korle issue load hobe -->
-                    <button id="allIssueBtn" class="load-btns active-btn w-[120px] py-2 px-3 rounded-sm" onclick="selectBtnCategory('All', this)">All</button>
+                    <button id="allIssueBtn" class="load-btns active-btn w-[120px] py-2 px-3 rounded-sm"
+                        onclick="selectBtnCategory('All', this)">All</button>
 
                     <!-- All chara baki buttons -->
-                     <div id="btns-container" class="flex items-center gap-2">
-                        <button class="text-[#64748B] w-[120px] py-2 px-3 border border-[#E4E4E7] rounded-sm">Open</button>
-                        <button class="text-[#64748B] w-[120px] py-2 px-3 border border-[#E4E4E7] rounded-sm">Closed</button>
-                     </div>
-                 </div>
+                    <div id="btns-container" class="flex items-center gap-2">
+                        <button
+                            class="text-[#64748B] w-[120px] py-2 px-3 border border-[#E4E4E7] rounded-sm">Open</button>
+                        <button
+                            class="text-[#64748B] w-[120px] py-2 px-3 border border-[#E4E4E7] rounded-sm">Closed</button>
+                    </div>
+                </div>
             </div>
 
             <div class="rounded-lg">
                 <!-- cards container div -->
-                <div class="shadow">
+                <div class="shadow min-h-screen bg-[#FBFBFB]">
                     <!-- total number of issues part - start-->
-                     <div class="p-6 flex flex-col md:flex-row space-y-10 md:space-y-0 md:justify-between items-center bg-[#FFFFFF] shadow border border-b border-[#E4E4E7]"> 
+                    <div
+                        class="p-6 flex flex-col md:flex-row space-y-10 md:space-y-0 md:justify-between items-center bg-[#FFFFFF] shadow border border-b border-[#E4E4E7]">
                         <div class="flex justify-start items-center gap-2">
                             <div class="p-[9px] rounded-[50%] bg-[#ECE4FF]">
                                 <img src="./assets/Aperture.png" alt="">
@@ -109,15 +117,35 @@
                         </div>
 
                         <div class="flex justify-end items-center gap-4">
-                            <span class="flex items-center gap-2"><span class="text-[#00A96E]"><i class="fa-solid fa-circle"></i></span>Open</span>
-                            <span class="flex items-center gap-2"><span class="text-[#A855F7]"><i class="fa-solid fa-circle"></i></span>Closed</span>
+                            <span class="flex items-center gap-2"><span class="text-[#00A96E]"><i
+                                        class="fa-solid fa-circle"></i></span>Open</span>
+                            <span class="flex items-center gap-2"><span class="text-[#A855F7]"><i
+                                        class="fa-solid fa-circle"></i></span>Closed</span>
                         </div>
-                     </div>
-                     <!-- total number of issue part - end -->
-                      
+                    </div>
+                    <!-- total number of issue part - end -->
+
+                    <!-- all cards -->
+                    <!-- <div> -->
+                    <div id="allIssuesContainer"
+                        class="bg-[#FBFBFB] p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mx-auto">
+                        <!-- cards -->
+                        <div class="text-center">
+
+                            <!-- dynamically all issue cards load -->
+                        </div>
+
+                        
+                    </div>
+                    <!-- loading spinner -->
+                    <div id="loading-spinner" class="flex justify-center items-center min-h-screen">
+                        <span class="loading loading-spinner loading-xl"></span>
+                    </div>
+                    <!-- </div> -->
                 </div>
             </div>
         </section>
     </main>
 </body>
+
 </html>
