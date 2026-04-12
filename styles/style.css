@@ -3,3 +3,14 @@
   font-family: "Geist", sans-serif;
   font-optical-sizing: auto;
 }
+
+.active-btn{
+  color: white;
+  background-color: #4A00FF;
+}
+
+.neutral-btn{
+  border: 1px solid #E4E4E7;
+  color: #64748B;
+  background-color: white;
+}
