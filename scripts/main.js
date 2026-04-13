@@ -170,7 +170,43 @@ const displayAllIssues = (issues) =>{
 }
 
 // displayAllIssues er moddhe used
-const labels = () =>{
-    
+const labels = (labelStatus) =>{
+    let result = "";
+
+    labelStatus.forEach(label =>{
+
+        let badgeClass = "";
+        let borderClass = "";
+        let imgSrc = "";
+
+        if(label === "bug"){
+            badgeClass = "text-[#EF4444] bg-[#FEECEC]";
+            borderClass = "border-[#EF4444]/30";
+            imgSrc = "./assets/bug.png";
+        }
+        else if (label === "help wanted") {
+            badgeClass = "text-[#D97706] bg-[#FFF8DB]";
+            borderClass = "border-[#D97706]/30";
+            imgSrc = "./assets/help-wanted.png";
+        }
+        else {
+            badgeClass = "text-[#00A96E] bg-[#DEFCE8]";
+            borderClass = "border-[#00A96E]/30";
+            imgSrc = "./assets/enhancement.png";
+        }
+
+        // result a ai part add hobe
+        result +=`
+        <div class="py-1.5 px-2 flex items-center text-[12px] ${badgeClass} rounded-[100px] border ${borderClass} gap-1">
+            <span>
+                <img src="${imgSrc}" class="w-3 h-3 inline-block" alt="">
+            </span>
+            ${label.toUpperCase()}
+            
+        </div>
+        `;
+    });
+
+    return result;
 }
 loadAllButtons();
