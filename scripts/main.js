@@ -4,6 +4,8 @@ const totalIssueCount = document.getElementById("totalIssueCount");
 
 const loadingSpinner = document.getElementById("loading-spinner");
 
+const allIssuesContainer = document.getElementById("allIssuesContainer");
+
 // all issues array
 let allIssues = [];
 
@@ -93,5 +95,82 @@ const selectBtnCategory = async(categoryStatus, btn) =>{
 // calculate total count of issues
 function totalCount(){
     document.getElementById("totalIssueCount").innerText = allIssuesContainer.children.length;
+}
+
+// all issue button
+async function loadAllIssues(){
+
+    showloading();
+
+    const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
+    const jData = await res.json();
+
+    // all issues display
+    displayAllIssues(jData.data);
+
+    totalIssueCount.innerText = jData.data.length;
+
+    hideLoading();
+}
+
+// all  cards display
+const displayAllIssues = (issues) =>{
+    console.log(issues);
+    allIssuesContainer.innerHTML = "";
+
+    issues.forEach(issue =>{
+        const issueCard = document.createElement("div");
+
+        // priority type er moddhe conditional rendering
+        let priorityTypeClass = "";
+        
+        if(issue.priority === "high"){
+            priorityTypeClass = "bg-[#FEECEC] text-[#EF4444]";
+        }
+        else if(issue.priority === "medium"){
+            priorityTypeClass = "bg-[#FFF6D1] text-[#F59E0B]";
+
+        }
+        else if(issue.priority === "low"){
+            priorityTypeClass = "bg-[#EEEFF2] text-[#9CA3AF]";
+        }
+
+        issueCard.className = "shadow h-full w-full";
+        issueCard.dataset.id = issue.id;
+
+        issueCard.innerHTML = `
+            <div class="border-t-[3px] ${issue.status === "open"? "border-t-[#00A96E]" : "border-t-[#A855F7]"} p-4 rounded-sm space-y-4">
+
+                <div class="flex justify-between items-center">
+
+                    <span><img src="${issue.status === "open" ? './assets/open-status.png' : './assets/closed-status.png'}" alt=""></span>
+                    <span class="rounded-[100px] ${priorityTypeClass} py-1.5 px-[25px]">
+                        ${issue.priority.toUpperCase()}
+                    </span>
+                </div>
+
+                <div class="space-y-2">
+                    <h3 class="font-semibold text-[14px]">${issue.title}</h3>
+                    <p class="text-[#64748B] text-[12px] line-clamp-2">
+                        ${issue.description}
+                    </p>
+                </div>
+                <div class="flex flex-wrap justify-start items-center gap-1">
+                    ${labels(issue.labels)}  //labels - function create
+                </div>
+            </div>
+
+            <div class="border-t border-[#E4E4E7] p-4 text-[12px] space-y-2 text-[#64748B]">
+                <p>#${issue.id} by ${issue.author}</p>
+                <p>${new Date(issue.createdAt).toLocaleDateString("en-US")}</p>
+            </div>
+        `;
+        allIssuesContainer.appendChild(issueCard);
+    })
+}
+
+// displayAllIssues er moddhe used
+const labels = () =>{
+    
 }
 loadAllButtons();
