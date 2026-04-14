@@ -209,4 +209,53 @@ const labels = (labelStatus) =>{
 
     return result;
 }
+
+//display modal function 
+const displayModal = (modal) => {
+
+    const showModal = document.getElementById("my_modal_5");
+
+    showModal.innerHTML = `
+        <div class="modal-box p-8">
+                <h3 class="text-2xl text-[#1F2937] font-bold mb-3">${modal.title}</h3>
+                <div class="flex justify-start items-center gap-2 mb-6 text-[12px] text-[#64748B]">
+
+                    <p class="py-1.5 px-2 rounded-[100px] text-white ${modal.status === "open" ? "bg-[#00A96E]" : "bg-[#A855F7]"}">${modal.status === "open" ? "Opened" : "Closed"}</p>
+
+                    <span class="bg-[#64748B] rounded-full w-1 h-1"></span>
+                    <p>${modal.status == "open" ? "Opened" : modal.status} by ${modal.assignee ? modal.assignee : "Anonymous"}</p>
+                    <span class="bg-[#64748B] rounded-full w-1 h-1"></span>
+                    <p>${new Date(modal.updatedAt).toLocaleDateString("en-US")}</p>
+                </div>
+                <div class="space-y-6">
+                    <div class="flex justify-start items-center gap-1">
+                        ${labels(modal.labels)}
+                    </div>
+                    <p class="text-[#64748B]">${modal.description}</p>
+    
+                    <div class="flex justify-start items-center gap-2.5">
+                    
+                        <!-- left -->
+                        <div class="flex-1 bg-[#F8FAFC] p-4">
+                            <p class="text-[#64748B]">Assignee:</p>
+                            <p class="font-semibold">${modal.assignee ? modal.assignee : "Anonymous"}</p>
+                        </div>
+
+                        <!-- right -->
+                        <div class="flex-1 bg-[#F8FAFC] space-y-1 p-4">
+                            <p class="text-[#64748B]">Priority:</p>
+                            <span class="text-white rounded-[100px] px-4 py-1.5 ${modal.priority == "high" ? 'bg-[#EF4444]' : modal.priority == 'medium' ? 'bg-[#F59E0B]' : 'bg-[#9CA3AF]'}">${modal.priority}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <!-- if there is a button in form, it will close the modal -->
+                        <button class="btn btn-active btn-primary">Close</button>
+                    </form>
+                </div>
+            </div>
+    `;
+    showModal.showModal();
+}
 loadAllButtons();
