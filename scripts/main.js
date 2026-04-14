@@ -6,6 +6,9 @@ const loadingSpinner = document.getElementById("loading-spinner");
 
 const allIssuesContainer = document.getElementById("allIssuesContainer");
 
+const searchBtn = document.getElementById("searchBtn");
+const inputText = document.getElementById("inputText");
+
 // all issues array
 let allIssues = [];
 
@@ -23,6 +26,7 @@ const hideLoading = ()=>{
 // buttons load function
 async function loadAllButtons(){
     // show loading spinner
+    showloading();
 
     const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
     const data = await res.json();
@@ -60,14 +64,16 @@ async function loadAllButtons(){
     totalIssueCount.innerText = `${allIssues.length} Issues`;
 
     // hide loading spinner
+    hideLoading();
 };
 
 // any button a click korle je function hobe
 const selectBtnCategory = async(categoryStatus, btn) =>{
     // show loading spinner
+    showloading();
 
     const allTypeBtn = document.querySelectorAll('#btns-container button');
-    console.log(allTypeBtn);
+    // console.log(allTypeBtn);
 
     allTypeBtn.forEach(button => {
         button.className= 'neutral-btn w-[120px] py-2 px-3 border border-[#E4E4E7] rounded-sm capitalize';
@@ -90,6 +96,7 @@ const selectBtnCategory = async(categoryStatus, btn) =>{
     totalIssueCount.innerText = `${filteredIssues.length} Issues`;
 
     // hide loading spinner
+    hideLoading();
 }
 
 // calculate total count of issues
@@ -156,7 +163,7 @@ const displayAllIssues = (issues) =>{
                     </p>
                 </div>
                 <div class="flex flex-wrap justify-start items-center gap-1">
-                    ${labels(issue.labels)}  //labels - function create
+                    ${labels(issue.labels)}
                 </div>
             </div>
 
@@ -210,6 +217,21 @@ const labels = (labelStatus) =>{
     return result;
 }
 
+// modal open
+allIssuesContainer.addEventListener("click", async (e)=>{
+    const card = e.target.closest("div.shadow"); //issue card class
+
+    if(!card)
+        return;
+
+    const id = card.dataset.id;
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
+    const Data = await res.json();
+
+    displayModal(Data.data);
+
+})
+
 //display modal function 
 const displayModal = (modal) => {
 
@@ -258,4 +280,34 @@ const displayModal = (modal) => {
     `;
     showModal.showModal();
 }
+
+
+// search issues function 
+async function searchIssues() {
+
+    const AllBtn = document.querySelector(".load-btns");
+    AllBtn.classList.add(".active-btn");
+
+    const searchText = inputText.value.trim();
+
+    if (!searchText) return;
+
+    showloading();
+
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`);
+    const Data = await res.json();
+
+    const result = Data.data;
+
+    displayAllIssues(result);
+    totalIssueCount.innerText = `${result.length} Issues`;
+
+    // clear input
+    inputText.value = "";
+    inputText.focus();
+
+    hideLoading();
+}
+totalCount();
+loadAllIssues();
 loadAllButtons();
